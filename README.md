@@ -1,6 +1,6 @@
 # Remove duplicates from a linked list
 
-###Constraints
+### Constraints
 
 * Can we assume this is a non-circular, singly linked list?
    * Yes
