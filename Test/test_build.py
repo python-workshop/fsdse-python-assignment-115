@@ -1,23 +1,33 @@
 from unittest import TestCase
-
+from linked_list import LinkedList
 
 class TestBuild(TestCase):
-    # check whether the values are there
-    # check that the duplicates are removed
     def test_check_whether_the_values_are_there(self):
         try:
-            from build import build
+            from build import remove_dupes
         except ImportError:
-            self.assertFalse("Import Error")
+            self.assertFalse("no function found")
 
-        result= build("")
-        self.assertEqual(False,result)
+        linked_list = LinkedList(None)
+        remove_dupes(linked_list)
+        self.assertEqual(linked_list.get_all_data(), [])
 
-    def test_check_that_the_duplicates_are_removed(self):
-        try:
-            from build import build
-        except ImportError:
-            self.assertFalse("Import Error")
+        print('Test: One element list')
+        linked_list.insert_to_front(2)
+        remove_dupes(linked_list)
+        self.assertEqual(linked_list.get_all_data(), [2])
 
-        result = build([1,1,2,3])
-        self.assertEqual(None, result)
+        print('Test: General case, duplicates')
+        linked_list.insert_to_front(1)
+        linked_list.insert_to_front(1)
+        linked_list.insert_to_front(3)
+        linked_list.insert_to_front(2)
+        linked_list.insert_to_front(3)
+        linked_list.insert_to_front(1)
+        linked_list.insert_to_front(1)
+        remove_dupes(linked_list)
+        self.assertEqual(linked_list.get_all_data(), [1, 3, 2])
+
+        print('Test: General case, no duplicates')
+        remove_dupes(linked_list)
+        self.assertEqual(linked_list.get_all_data(), [1, 3, 2])
